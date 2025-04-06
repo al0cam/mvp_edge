@@ -1,39 +1,22 @@
 import express from "express";
-import type { Request, Response } from "express";
-import { createJob, getJob, getAllJobs } from "./queue";
+import { json } from "body-parser";
+import routes from "./api/routes";
 
 const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Welcome to the Job Queue API" });
+// Middleware
+app.use(json());
+
+// Routes
+app.use("/api", routes);
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "up" });
 });
 
-app.get("/jobs", (req: Request, res: Response) => {
-  const jobs = getAllJobs();
-  if (jobs.length === 0) {
-    res.status(404).json({ error: "No jobs found" });
-    return;
-  }
-  res.status(200).json(jobs);
-});
-
-app.post("/jobs", (req: Request, res: Response) => {
-  const id = createJob(req.body);
-  res.status(202).json({ message: "Job accepted", jobId: id });
-});
-
-app.get("/jobs/:id", (req: Request<{ id: string }>, res: Response) => {
-  const job = getJob(req.params.id);
-
-  if (!job) {
-    res.status(404).json({ error: "Job not found" });
-    return;
-  }
-
-  res.status(200).json(job);
-});
-
-app.listen(3000, () => {
-  console.log("🚀 API server running at http://localhost:3000");
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
