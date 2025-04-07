@@ -1,7 +1,7 @@
 import { Worker } from "bullmq";
 import IORedis from "ioredis";
-import { JobType } from "./models/job";
-import * as processors from "./workers/processors";
+import { JobType } from "../models/job";
+import * as processors from "./processors";
 
 // Redis connection for the worker
 const connection = new IORedis({
@@ -31,6 +31,9 @@ const worker = new Worker(
   { connection },
 );
 
+// Notify about the start of the worker
+console.log("Worker started and ready to process jobs");
+
 // Handle worker events
 worker.on("completed", (job) => {
   console.log(`Job ${job.id} completed successfully`);
@@ -39,8 +42,6 @@ worker.on("completed", (job) => {
 worker.on("failed", (job, err) => {
   console.error(`Job ${job?.id} failed with error: ${err.message}`);
 });
-
-console.log("Worker started and ready to process jobs");
 
 // Handle graceful shutdown
 process.on("SIGTERM", async () => {
