@@ -3,7 +3,32 @@ import { addJob, getJob } from "../queue/queue-service";
 import { JobType } from "../models/job";
 import type { JobData } from "../models/job";
 
-export const submitJob = async (req: Request, res: Response) => {
+/**
+ * Job Controller
+ * Handles job submission, status retrieval, and cancellation.
+ *
+ * @module controllers
+ * @requires express
+ * @requires ../queue/queue-service
+ * @requires ../models/job
+ * @exports submitJob
+ * @exports getJobStatus
+ * @exports cancelJob
+ */
+
+/**
+ * Submits a new job to the queue.
+ *
+ * @function submitJob
+ * @param {Request} req - The request object containing job data.
+ * @param {Response} res - The response object to send the result.
+ * @returns {Promise<void>} - A promise that resolves when the job is submitted.
+ * @throws {Error} - If there is an error while submitting the job.
+ */
+export const submitJob = async (
+  req: Request,
+  res: Response,
+): Promise<Response<any, Record<string, any>> | undefined> => {
   try {
     const jobData: JobData = req.body;
 
@@ -33,7 +58,19 @@ export const submitJob = async (req: Request, res: Response) => {
   }
 };
 
-export const getJobStatus = async (req: Request, res: Response) => {
+/**
+ * Retrieves the status of a job.
+ *
+ * @function getJobStatus
+ * @param {Request} req - The request object containing the job ID.
+ * @param {Response} res - The response object to send the result.
+ * @returns {Promise<void>} - A promise that resolves when the job status is retrieved.
+ * @throws {Error} - If there is an error while retrieving the job status.
+ */
+export const getJobStatus = async (
+  req: Request,
+  res: Response,
+): Promise<Response<any, Record<string, any>> | undefined> => {
   try {
     const { id } = req.params;
     const job = await getJob(id);
@@ -52,7 +89,19 @@ export const getJobStatus = async (req: Request, res: Response) => {
   }
 };
 
-export const cancelJob = async (req: Request, res: Response) => {
+/**
+ * Cancels a job.
+ *
+ * @function cancelJob
+ * @param {Request} req - The request object containing the job ID.
+ * @param {Response} res - The response object to send the result.
+ * @returns {Promise<void>} - A promise that resolves when the job is cancelled.
+ * @throws {Error} - If there is an error while cancelling the job.
+ */
+export const cancelJob = async (
+  req: Request,
+  res: Response,
+): Promise<Response<any, Record<string, any>> | undefined> => {
   try {
     const { id } = req.params;
     const job = await getJob(id);

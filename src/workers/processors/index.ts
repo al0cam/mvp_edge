@@ -1,6 +1,13 @@
 // Mock processors for different job types
 
-// File processor
+/**
+ * Processes a file processing job.
+ * This is a mock implementation that simulates file processing.
+ *
+ * @param data - The data for the file processing job.
+ * @returns A promise that resolves to the processed file data.
+ * @throws Error if the processing fails.
+ */
 export const fileProcessor = async (data: any) => {
   console.log("Processing file job:", data);
 
@@ -19,7 +26,13 @@ export const fileProcessor = async (data: any) => {
   return result;
 };
 
-// Data enrichment processor
+/**
+ * Processes a data enrichment job.
+ * This is a mock implementation that simulates data enrichment.
+ *
+ * @param data - The data for the data enrichment job.
+ * @returns A promise that resolves to the enriched data.
+ */
 export const dataEnrichmentProcessor = async (data: any) => {
   console.log("Processing data enrichment job:", data);
 
@@ -50,7 +63,13 @@ export const dataEnrichmentProcessor = async (data: any) => {
   return result;
 };
 
-// Calculation processor
+/**
+ * Processes a calculation job.
+ * This is a mock implementation that simulates complex calculations.
+ *
+ * @param data - The data for the calculation job.
+ * @returns A promise that resolves to the calculation result.
+ */
 export const calculationProcessor = async (data: any) => {
   console.log("Processing calculation job:", data);
 
