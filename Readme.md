@@ -34,7 +34,7 @@ This system allows you to submit processing jobs through a RESTful API, which ar
 ### Start the API Server
 
 ```
-npm run start:api
+npm run dev
 ```
 
 This starts the RESTful API server on port 3000 (or the port specified in the PORT environment variable).
@@ -42,7 +42,7 @@ This starts the RESTful API server on port 3000 (or the port specified in the PO
 ### Start Worker(s)
 
 ```
-npm run start:worker
+ts-node ./src/workers/worker-server.ts
 ```
 
 You can start multiple worker instances to scale processing capacity.
@@ -126,14 +126,13 @@ Perform complex calculations on numerical data
     controllers.ts # Request handlers
   /workers
     processors/    # Job processors for different job types
+    worker-server.ts # Worker entry point
   /models
     job.ts         # Job data models/interfaces
+    tree.ts        # Models for tree structure
   /queue
     queue-service.ts # BullMQ queue setup and management
-  /config
-    index.ts       # Configuration variables
   index.ts         # API server entry point
-  worker-server.ts # Worker entry point
 ```
 
 ## Scaling
@@ -142,3 +141,11 @@ The system is designed to scale horizontally:
 - Run multiple worker instances to increase processing capacity
 - Redis handles job distribution across all available workers
 - Each worker can be run on a separate machine or container
+
+## Demonstration
+
+In the following video, we demonstrate the system in action:
+
+
+
+As you can see, the video showcases the job submission process, the workers processing jobs, and the API responses for job status tracking. The system is capable of handling multiple job types and can scale to meet demand.
