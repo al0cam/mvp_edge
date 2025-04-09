@@ -7,6 +7,7 @@ import { JobStatus } from "../models/job";
 const connection = new IORedis({
   host: process.env.REDIS_HOST || "localhost",
   port: Number.parseInt(process.env.REDIS_PORT || "6379"),
+  // Mandatory option for BullMQ, BullMQ handles reconnections automatically
   maxRetriesPerRequest: null,
 });
 
