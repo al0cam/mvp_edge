@@ -146,6 +146,6 @@ The system is designed to scale horizontally:
 
 In the following video, we demonstrate the system in action:
 
-
+https://github.com/user-attachments/assets/d6c18d9f-fa8c-46fc-9a76-9889f9c9c20f
 
 As you can see, the video showcases the job submission process, the workers processing jobs, and the API responses for job status tracking. The system is capable of handling multiple job types and can scale to meet demand.
