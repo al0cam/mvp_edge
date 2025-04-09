@@ -1,5 +1,7 @@
 // Mock processors for different job types
 
+import { growthStageASCIIArt, growthStages } from "../../models/tree";
+
 /**
  * Processes a file processing job.
  * This is a mock implementation that simulates file processing.
@@ -109,4 +111,41 @@ export const calculationProcessor = async (data: any) => {
   } catch (error: any) {
     throw new Error(`Calculation failed: ${error.message}`);
   }
+};
+
+/**
+* Processes a tree planting job.
+* This is just a minigame for fun.
+*
+* @param data - The data for the tree planting job.
+* @returns A promise that resolves to the tree growth result.
+*/
+export const treeProcessor = async (data: any) => {
+  console.log("Processing tree job:", data);
+
+  // Simulate processing time
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+
+  let growthStage = growthStages[0];
+
+  while (growthStage !== growthStages[growthStages.length - 1]) {
+    console.log(`Tree is now a ${growthStage}`);
+    console.log(growthStageASCIIArt[growthStage]);
+    // Simulate growth time
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    // Move to the next growth stage
+    const currentIndex = growthStages.indexOf(growthStage);
+    if (currentIndex < growthStages.length - 1) {
+      growthStage = growthStages[currentIndex + 1];
+    }
+  }
+  console.log("Tree has fully grown!");
+  console.log(growthStageASCIIArt[growthStage]);
+  return {
+    originalData: data,
+    processedAt: new Date(),
+    growthStage: growthStages[growthStages.length - 1],
+    status: "success",
+  };
 };

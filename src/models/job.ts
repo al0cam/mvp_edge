@@ -15,6 +15,7 @@ export enum JobType {
   FILE_PROCESSING = "file_processing",
   DATA_ENRICHMENT = "data_enrichment",
   CALCULATION = "calculation",
+  TREE = "tree",
 }
 
 /**
@@ -72,6 +73,13 @@ export const jobExamples = {
     payload: {
       operation: "complex",
       numbers: [1, 2, 3, 4, 5],
+    },
+  },
+  tree: {
+    type: JobType.TREE,
+    payload: {
+      species: "Oak",
+      location: "Park",
     },
   },
 };

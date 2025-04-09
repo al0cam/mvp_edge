@@ -24,6 +24,8 @@ const worker = new Worker(
         return await processors.dataEnrichmentProcessor(job.data);
       case JobType.CALCULATION:
         return await processors.calculationProcessor(job.data);
+      case JobType.TREE:
+        return await processors.treeProcessor(job.data);
       default:
         throw new Error(`Unknown job type: ${job.name}`);
     }
